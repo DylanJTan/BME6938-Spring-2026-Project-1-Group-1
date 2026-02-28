@@ -1,0 +1,7 @@
+Algorithm,Accuracy,Macro F1,Weighted F1,Precision (macro),Recall (macro)
+Logistic Regression,0.7460,0.6422,0.7018,0.7557,0.6109
+Random Forest,0.7460,0.5636,0.7065,0.6523,0.5366
+Gradient Boosting,0.7619,0.5339,0.7296,0.6557,0.4759
+Svm,0.7302,0.4177,0.6712,0.4287,0.4309
+Mlp,0.7302,0.5531,0.6713,0.6042,0.5359
+Baseline (Stratified Random),0.2857,0.0461,0.2897,0.0468,0.0455
