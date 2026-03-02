@@ -56,23 +56,68 @@
   "hyperparameters": {
     "logistic_regression": {
       "best_params": "{'solver': 'saga', 'max_iter': 5000, 'class_weight': None, 'C': 0.1}",
-      "best_score": 0.6721435343653884
+      "best_score": 0.6721435343653884,
+      "mean_cv_score": 0.6721435343653884,
+      "std_cv_score": 0.03496297046917598,
+      "n_splits": 3,
+      "cv_scores_per_fold": [
+        0.7189608029944166,
+        0.6625088419206068,
+        0.6349609581811418
+      ]
     },
     "random_forest": {
       "best_params": "{'n_estimators': 200, 'min_samples_split': 10, 'max_depth': 20, 'class_weight': 'balanced_subsample'}",
-      "best_score": 0.7198141402396064
+      "best_score": 0.7198141402396064,
+      "mean_cv_score": 0.7198141402396064,
+      "std_cv_score": 0.020011772941844166,
+      "n_splits": 3,
+      "cv_scores_per_fold": [
+        0.7457641441669836,
+        0.6970588235294118,
+        0.7166194530224239
+      ]
     },
     "gradient_boosting": {
       "best_params": "{'subsample': 0.9, 'n_estimators': 100, 'max_depth': 7, 'learning_rate': 0.1}",
-      "best_score": 0.7344205718628812
+      "best_score": 0.7344205718628812,
+      "mean_cv_score": 0.7344205718628812,
+      "std_cv_score": 0.01694545296120495,
+      "n_splits": 3,
+      "cv_scores_per_fold": [
+        0.7275962087472878,
+        0.7577273158722754,
+        0.7179381909690805
+      ]
     },
     "svm": {
       "best_params": "{'estimator__kernel': 'rbf', 'estimator__gamma': 'auto', 'estimator__class_weight': 'balanced', 'estimator__C': 1}",
-      "best_score": 0.6581359954929583
+      "best_score": 0.6581359954929583,
+      "mean_cv_score": 0.6581359954929583,
+      "std_cv_score": 0.012979473286099424,
+      "n_splits": 3,
+      "cv_scores_per_fold": [
+        0.673964111808215,
+        0.658271977124665,
+        0.6421718975459947
+      ]
     },
     "mlp": {
       "best_params": "{'max_iter': 1000, 'learning_rate_init': 0.01, 'hidden_layer_sizes': (200, 100), 'alpha': 0.0001}",
-      "best_score": 0.6463947084579759
+      "best_score": 0.6463947084579759,
+      "mean_cv_score": 0.6463947084579759,
+      "std_cv_score": 0.030442900725181958,
+      "n_splits": 3,
+      "cv_scores_per_fold": [
+        0.6797044852004063,
+        0.6533618307309038,
+        0.6061178094426176
+      ]
     }
+  },
+  "cross_validation": {
+    "scoring_metric": "f1_weighted",
+    "cv_strategy": "StratifiedKFold (adaptive)",
+    "description": "Cross-validation performed on combined train+val set"
   }
 }

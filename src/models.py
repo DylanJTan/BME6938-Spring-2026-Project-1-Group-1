@@ -165,10 +165,20 @@ def train_logistic_regression(X_train, X_val, y_train, y_val, random_state=42):
     
     search.fit(X_combined, y_combined)
     
+    # Extract CV fold scores for the best model
+    best_idx = search.best_index_
+    fold_scores = []
+    for i in range(n_splits):
+        fold_scores.append(search.cv_results_[f'split{i}_test_score'][best_idx])
+    
     return search.best_estimator_, {
         'best_params': search.best_params_,
         'best_score': search.best_score_,
-        'cv_results': search.cv_results_
+        'cv_results': search.cv_results_,
+        'cv_scores': fold_scores,
+        'mean_cv_score': float(np.mean(fold_scores)),
+        'std_cv_score': float(np.std(fold_scores)),
+        'n_splits': n_splits
     }
 
 
@@ -208,10 +218,20 @@ def train_random_forest(X_train, X_val, y_train, y_val, random_state=42):
     
     search.fit(X_combined, y_combined)
     
+    # Extract CV fold scores for the best model
+    best_idx = search.best_index_
+    fold_scores = []
+    for i in range(n_splits):
+        fold_scores.append(search.cv_results_[f'split{i}_test_score'][best_idx])
+    
     return search.best_estimator_, {
         'best_params': search.best_params_,
         'best_score': search.best_score_,
-        'cv_results': search.cv_results_
+        'cv_results': search.cv_results_,
+        'cv_scores': fold_scores,
+        'mean_cv_score': float(np.mean(fold_scores)),
+        'std_cv_score': float(np.std(fold_scores)),
+        'n_splits': n_splits
     }
 
 
@@ -251,10 +271,20 @@ def train_gradient_boosting(X_train, X_val, y_train, y_val, random_state=42):
     
     search.fit(X_combined, y_combined)
     
+    # Extract CV fold scores for the best model
+    best_idx = search.best_index_
+    fold_scores = []
+    for i in range(n_splits):
+        fold_scores.append(search.cv_results_[f'split{i}_test_score'][best_idx])
+    
     return search.best_estimator_, {
         'best_params': search.best_params_,
         'best_score': search.best_score_,
-        'cv_results': search.cv_results_
+        'cv_results': search.cv_results_,
+        'cv_scores': fold_scores,
+        'mean_cv_score': float(np.mean(fold_scores)),
+        'std_cv_score': float(np.std(fold_scores)),
+        'n_splits': n_splits
     }
 
 
@@ -295,10 +325,20 @@ def train_svm(X_train, X_val, y_train, y_val, random_state=42):
     
     search.fit(X_combined, y_combined)
     
+    # Extract CV fold scores for the best model
+    best_idx = search.best_index_
+    fold_scores = []
+    for i in range(n_splits):
+        fold_scores.append(search.cv_results_[f'split{i}_test_score'][best_idx])
+    
     return search.best_estimator_, {
         'best_params': search.best_params_,
         'best_score': search.best_score_,
-        'cv_results': search.cv_results_
+        'cv_results': search.cv_results_,
+        'cv_scores': fold_scores,
+        'mean_cv_score': float(np.mean(fold_scores)),
+        'std_cv_score': float(np.std(fold_scores)),
+        'n_splits': n_splits
     }
 
 
@@ -338,10 +378,20 @@ def train_mlp(X_train, X_val, y_train, y_val, random_state=42):
     
     search.fit(X_combined, y_combined)
     
+    # Extract CV fold scores for the best model
+    best_idx = search.best_index_
+    fold_scores = []
+    for i in range(n_splits):
+        fold_scores.append(search.cv_results_[f'split{i}_test_score'][best_idx])
+    
     return search.best_estimator_, {
         'best_params': search.best_params_,
         'best_score': search.best_score_,
-        'cv_results': search.cv_results_
+        'cv_results': search.cv_results_,
+        'cv_scores': fold_scores,
+        'mean_cv_score': float(np.mean(fold_scores)),
+        'std_cv_score': float(np.std(fold_scores)),
+        'n_splits': n_splits
     }
 
 
@@ -365,23 +415,23 @@ def train_all_models(X_train, X_val, y_train, y_val, random_state=42):
     """
     print("Training Logistic Regression...")
     lr_model, lr_cv = train_logistic_regression(X_train, X_val, y_train, y_val, random_state)
-    print(f"  Best CV Score: {lr_cv['best_score']:.4f}")
+    print(f"  CV Score (F1-Weighted): {lr_cv['mean_cv_score']:.4f} (+/- {lr_cv['std_cv_score']:.4f})")
     
     print("Training Random Forest...")
     rf_model, rf_cv = train_random_forest(X_train, X_val, y_train, y_val, random_state)
-    print(f"  Best CV Score: {rf_cv['best_score']:.4f}")
+    print(f"  CV Score (F1-Weighted): {rf_cv['mean_cv_score']:.4f} (+/- {rf_cv['std_cv_score']:.4f})")
     
     print("Training Gradient Boosting...")
     gb_model, gb_cv = train_gradient_boosting(X_train, X_val, y_train, y_val, random_state)
-    print(f"  Best CV Score: {gb_cv['best_score']:.4f}")
+    print(f"  CV Score (F1-Weighted): {gb_cv['mean_cv_score']:.4f} (+/- {gb_cv['std_cv_score']:.4f})")
     
     print("Training Support Vector Machine...")
     svm_model, svm_cv = train_svm(X_train, X_val, y_train, y_val, random_state)
-    print(f"  Best CV Score: {svm_cv['best_score']:.4f}")
+    print(f"  CV Score (F1-Weighted): {svm_cv['mean_cv_score']:.4f} (+/- {svm_cv['std_cv_score']:.4f})")
     
     print("Training Multi-Layer Perceptron...")
     mlp_model, mlp_cv = train_mlp(X_train, X_val, y_train, y_val, random_state)
-    print(f"  Best CV Score: {mlp_cv['best_score']:.4f}")
+    print(f"  CV Score (F1-Weighted): {mlp_cv['mean_cv_score']:.4f} (+/- {mlp_cv['std_cv_score']:.4f})")
     
     models = {
         'logistic_regression': lr_model,

@@ -56,7 +56,7 @@ def main():
             else:
                 raise FileNotFoundError(f"Dataset not found at {DATA_FILE}")
         
-        X_train, X_val, X_test, y_train, y_val, y_test, df_clean = load_data(
+        X_train, X_val, X_test, y_train, y_val, y_test, df_clean, class_mapping = load_data(
             str(DATA_FILE),
             target_col='class',
             missing_value_strategy='drop',
@@ -90,14 +90,29 @@ def main():
     
     # Phase 3: Train models
     print("\n[Phase 3] Training models with hyperparameter tuning...")
-    print("  (10-fold stratified CV on train+val combined)")
+    print("  (Adaptive stratified CV on train+val combined)")
     try:
         models, cv_results = train_all_models(
             X_train_prep, X_val_prep,
             y_train_enc, y_val_enc,
             random_state=RANDOM_STATE
         )
-        print("  All models trained successfully!")
+        
+        # Print CV scores summary table
+        print("\n" + "="*80)
+        print("CROSS-VALIDATION RESULTS (F1-Weighted Score)")
+        print("="*80)
+        print(f"{'Model':<30} {'Mean CV Score':>15} {'Std Dev':>12} {'CV Folds':>10}")
+        print("-"*80)
+        for model_name, cv_result in cv_results.items():
+            model_display = model_name.replace('_', ' ').title()
+            mean_score = cv_result['mean_cv_score']
+            std_score = cv_result['std_cv_score']
+            n_folds = cv_result['n_splits']
+            print(f"{model_display:<30} {mean_score:>15.4f} {std_score:>12.4f} {n_folds:>10d}")
+        print("="*80)
+        
+        print("\n  All models trained successfully!")
     except Exception as e:
         print(f"  Error training models: {e}")
         import traceback
@@ -166,10 +181,19 @@ def main():
         for model_name, cv_result in cv_results.items():
             hyperparams[model_name] = {
                 'best_params': str(cv_result['best_params']),
-                'best_score': float(cv_result['best_score'])
+                'best_score': float(cv_result['best_score']),
+                'mean_cv_score': cv_result['mean_cv_score'],
+                'std_cv_score': cv_result['std_cv_score'],
+                'n_splits': cv_result['n_splits'],
+                'cv_scores_per_fold': [float(score) for score in cv_result['cv_scores']]
             }
         
         metrics_summary['hyperparameters'] = hyperparams
+        metrics_summary['cross_validation'] = {
+            'scoring_metric': 'f1_weighted',
+            'cv_strategy': 'StratifiedKFold (adaptive)',
+            'description': 'Cross-validation performed on combined train+val set'
+        }
         
         results_file = RESULTS_DIR / 'metrics.json'
         with open(results_file, 'w') as f:
