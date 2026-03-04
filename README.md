@@ -1,7 +1,4 @@
 # BME6938-Spring-2026-Project-1-Group-1
-Following data description from: https://www.openml.org/d/5
-Cardiac Arrhythmia Database
-
 # Cardiac Arrhythmia Classification with scikit-learn
 
 ## Project Overview
@@ -20,6 +17,7 @@ The objective is to minimize the difference between a cardiologist's classificat
 ## Data Source
 
 **Dataset**: OpenML Cardiac Arrhythmia (Dataset #5)
+Link: https://www.openml.org/d/5
 
 **Specifications**:
 - **Samples**: 452 patient ECG recordings
