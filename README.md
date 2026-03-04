@@ -114,7 +114,7 @@ python scripts/train_pipeline.py
 1. Loads and preprocesses ARFF data
 2. Splits into train (72.25%), validation (12.75%), and test (15%)
 3. Encodes categorical features and scales numeric features
-4. Trains 5 algorithms with 10-fold stratified cross-validation for hyperparameter tuning
+4. Trains 5 algorithms with 3-fold stratified cross-validation for hyperparameter tuning
 5. Evaluates on held-out test set
 6. Saves trained models and results
 
@@ -199,8 +199,8 @@ BME6938-Spring-2026-Project-1-Group-1/
 ### Data Handling
 - **Train/Val/Test Split**: 85% (train+val combined), 15% (test) , train+val splits again into 85% train and 15% val (72.25% total and 12.75% total)
 - **Stratification**: StratifiedKFold ensures class proportions are preserved in all splits
-- **Cross-Validation**: 10-fold stratified CV on combined train+val data
-- **Hyperparameter Tuning**: GridSearchCV with macro F1 as the scoring metric
+- **Cross-Validation**: 3-fold stratified CV on combined train+val data (adaptive based on smallest class size)
+- **Hyperparameter Tuning**: GridSearchCV with f1_weighted as the scoring metric
 
 ### Preprocessing
 - **Feature Encoding**: Categorical features encoded with LabelEncoder
