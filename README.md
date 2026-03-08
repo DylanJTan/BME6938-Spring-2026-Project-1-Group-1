@@ -247,8 +247,6 @@ All algorithms use class-weighted loss to handle class imbalance.
 
 ## Key Findings
 
-*(To be filled after running the training pipeline)*
-
 - **Best-performing algorithm**: [Model name and test-set macro F1 score]
 - **Class imbalance observations**: [Which classes are underrepresented, impact on predictions]
 - **Most discriminative features**: [Top 10 features by importance, if applicable]
