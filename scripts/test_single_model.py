@@ -29,7 +29,7 @@ def main():
     
     # Configuration
     RANDOM_STATE = 42
-    DATA_FILE = Path(__file__).parent.parent / 'dataset_5_arrhythmia.arff'
+    DATA_FILE = Path(__file__).parent.parent / 'data' / 'dataset_5_arrhythmia.arff'
     MODELS_DIR = Path(__file__).parent.parent / 'models'
     RESULTS_DIR = Path(__file__).parent.parent / 'results'
     
@@ -44,7 +44,7 @@ def main():
     # Phase 1: Load data
     print("\n[Phase 1] Loading data...")
     try:
-        X_train, X_val, X_test, y_train, y_val, y_test, df_clean = load_data(
+        X_train, X_val, X_test, y_train, y_val, y_test, df_clean, class_mapping = load_data(
             str(DATA_FILE),
             target_col='class',
             missing_value_strategy='drop',
