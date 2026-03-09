@@ -245,24 +245,25 @@ All algorithms use class-weighted loss to handle class imbalance.
 - **Confusion Matrix**: Class-wise prediction accuracy
 - **Baseline**: Stratified random classifier for comparison
 
-## Key Findings
+## Results Summary
 
-- **Refer to our report, to be listed:**
-  
+- **Best-performing algorithm**: Logistic Regression had the highest Macro F1, but Gradient Boosting had highest accuracy.
+- **Class imbalance observations**: Left Ventricule hypertrophy, PVC, and Supraventricular Premature Contraction
+- **Most discriminative features**: Heart Rate was the most important feature across models
+- **Notable misclassifications**: Normal can be misclassified as other arrythmias
+- **Clinical implications**: This provides a transparent and reproducible baseline that can help with the clinical translation of classical models, showing that these models can be easily integrated in clinical workflows.
+
 ## Model Performance Comparison
 
 After running `scripts/train_pipeline.py`, a performance table will be generated in `results/performance_comparison.csv`:
 
 | Algorithm | Accuracy | Macro F1 | Weighted F1 | Precision | Recall |
 |-----------|----------|----------|-------------|-----------|--------|
-| Logistic Regression | .... | .... | .... | .... | .... |
-| Random Forest | .... | .... | .... | .... | .... |
-| Gradient Boosting | .... | .... | .... | .... | .... |
-| SVM | .... | .... | .... | .... | .... |
-| MLP | .... | .... | .... | .... | .... |
-| Baseline (Stratified Random) | .... | .... | .... | .... | .... |
-
-**Note**: Best results are highlighted. Run the full pipeline to populate this table.
+| Logistic Regression | ..0.746.. | ..0.642.. | ..0.702.. |
+| Random Forest | ..0.746.. | .0.564... | ..0.707.. |
+| Gradient Boosting | ..0.762.. | ..0.534.. | ..0.730.. |
+| SVM | ..0.730.. | ..0.418.. | ..0.671.. |
+| MLP | ..0.730.. | ..0.553.. | ..0.671.. |
 
 ## Limitations & Future Work
 
@@ -305,15 +306,15 @@ jupyter notebook notebooks/demo.ipynb
 
 ### Reproducibility Checklist
 
-- ✅ Fixed random seeds (RANDOM_STATE=42) in all functions
-- ✅ Test set held-out during CV/tuning (CV only on train+val combined)
-- ✅ Scaler fitted on train+val, applied consistently to test
-- ✅ StratifiedKFold used throughout to preserve class distributions
-- ✅ All file paths are relative (no hardcoded absolute paths)
-- ✅ Running pipeline twice produces identical results
-- ✅ All figures exportable as high-resolution PNG/PDF (300+ DPI)
-- ✅ Full code documentation (docstrings for all functions)
-- ✅ All dependencies pinned in requirements.txt
+- Fixed random seeds (RANDOM_STATE=42) in all functions
+- Test set held-out during CV/tuning (CV only on train+val combined)
+- Scaler fitted on train+val, applied consistently to test
+- StratifiedKFold used throughout to preserve class distributions
+- All file paths are relative (no hardcoded absolute paths)
+- Running pipeline twice produces identical results
+- All figures exportable as high-resolution PNG/PDF (300+ DPI)
+- Full code documentation (docstrings for all functions)
+- All dependencies pinned in requirements.txt
 
 **Expected behavior**: Running `python scripts/train_pipeline.py` on a fresh machine with the same Python/package versions should produce identical metrics and saved models.
 
