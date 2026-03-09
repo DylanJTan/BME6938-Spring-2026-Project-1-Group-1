@@ -247,12 +247,8 @@ All algorithms use class-weighted loss to handle class imbalance.
 
 ## Key Findings
 
-- **Best-performing algorithm**: [Model name and test-set macro F1 score]
-- **Class imbalance observations**: [Which classes are underrepresented, impact on predictions]
-- **Most discriminative features**: [Top 10 features by importance, if applicable]
-- **Notable misclassifications**: [Class pairs that are often confused]
-- **Clinical implications**: [How well does this model perform for clinical use?]
-
+- **Refer to our report, to be listed:**
+  
 ## Model Performance Comparison
 
 After running `scripts/train_pipeline.py`, a performance table will be generated in `results/performance_comparison.csv`:
