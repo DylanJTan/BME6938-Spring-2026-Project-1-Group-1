@@ -392,6 +392,15 @@ python -m pytest tests/ -v  # (if test suite added)
 
 [TBD]
 
+## Contributors
+
+This project was developed by BME 6938 Spring 2026 - Group 1:
+
+- **Dylan Tan** (dylanjtan) - Project lead, model implementation, evaluation pipeline
+- **Team Member 1** - Data preprocessing and EDA
+- **Team Member 2** - Visualization and documentation
+- **Team Member 3** - Testing and validation
+
 ## Contact
 
 For questions or issues, please contact the development team or open an issue in the repository.

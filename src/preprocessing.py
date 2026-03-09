@@ -198,6 +198,43 @@ def preprocess_data(X_train, X_val, X_test, scale=True, encode_categorical=True,
     return X_train_prep, X_val_prep, X_test_prep, preprocessing_info
 
 
+def select_features_by_variance(X_train, X_val, X_test, threshold=0.0):
+    """
+    Select features based on variance threshold to remove low-variance features.
+    
+    Parameters
+    ----------
+    X_train, X_val, X_test : pd.DataFrame or ndarray
+        Train, validation, and test feature sets
+    threshold : float, default=0.0
+        Variance threshold below which features are removed
+    
+    Returns
+    -------
+    X_train_sel, X_val_sel, X_test_sel : pd.DataFrame or ndarray
+        Feature-selected datasets
+    selected_features : list
+        List of selected feature names or indices
+    """
+    from sklearn.feature_selection import VarianceThreshold
+    
+    selector = VarianceThreshold(threshold=threshold)
+    X_train_sel = selector.fit_transform(X_train)
+    X_val_sel = selector.transform(X_val)
+    X_test_sel = selector.transform(X_test)
+    
+    # Get selected feature names if DataFrame
+    if isinstance(X_train, pd.DataFrame):
+        selected_features = X_train.columns[selector.get_support()].tolist()
+        X_train_sel = pd.DataFrame(X_train_sel, columns=selected_features)
+        X_val_sel = pd.DataFrame(X_val_sel, columns=selected_features)
+        X_test_sel = pd.DataFrame(X_test_sel, columns=selected_features)
+    else:
+        selected_features = selector.get_support(indices=True).tolist()
+    
+    return X_train_sel, X_val_sel, X_test_sel, selected_features
+
+
 def encode_target(y_train, y_val, y_test):
     """
     Encode target variable using LabelEncoder.
