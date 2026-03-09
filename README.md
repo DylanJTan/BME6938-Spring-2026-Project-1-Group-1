@@ -5,16 +5,16 @@
 
 This project implements a machine learning pipeline for multi-class classification of cardiac arrhythmias from electrocardiogram (ECG) data. The goal is to develop and compare multiple scikit-learn algorithms to predict arrhythmia types with high accuracy, supporting early detection and patient safety in clinical settings.
 
-## Problem Statement
+## Clinical Context
 
 Cardiac arrhythmias are irregular heartbeats that can range from benign to life-threatening. Early and accurate detection is crucial for patient outcomes. This project addresses a **16-class classification problem**:
 - **Class 1**: Normal heart rhythm
 - **Classes 2-15**: Different types of arrhythmias (e.g., atrial fibrillation, ventricular tachycardia, etc.)
 - **Class 16**: Unclassified
 
-The objective is to minimize the difference between a cardiologist's classification and the machine learning model's predictions using ECG measurements and patient demographics.
+The objective is to minimize the difference between a cardiologist's classification and the machine learning model's predictions using ECG measurements and patient demographics in a reproducible manner to support clinical translation.
 
-## Data Source
+## Data Description
 
 **Dataset**: OpenML Cardiac Arrhythmia (Dataset #5)
 Link: https://www.openml.org/d/5
@@ -83,7 +83,7 @@ jupyter notebook notebooks/results.ipynb
 - Training pipeline: ~30-60 minutes (depends on hardware)
 - Results notebook: ~2-5 minutes
 
-## Usage Instructions
+## Usage Guide
 
 ### 1. Exploratory Data Analysis (EDA)
 
@@ -154,7 +154,7 @@ jupyter notebook notebooks/demo.ipynb
 - Example of correct and incorrect predictions
 - Usage instructions for new data
 
-## Repository Structure
+## Project Structure
 
 ```
 BME6938-Spring-2026-Project-1-Group-1/
@@ -257,13 +257,13 @@ All algorithms use class-weighted loss to handle class imbalance.
 
 After running `scripts/train_pipeline.py`, a performance table will be generated in `results/performance_comparison.csv`:
 
-| Algorithm | Accuracy | Macro F1 | Weighted F1 | Precision | Recall |
-|-----------|----------|----------|-------------|-----------|--------|
-| Logistic Regression | ..0.746.. | ..0.642.. | ..0.702.. |
-| Random Forest | ..0.746.. | .0.564... | ..0.707.. |
-| Gradient Boosting | ..0.762.. | ..0.534.. | ..0.730.. |
-| SVM | ..0.730.. | ..0.418.. | ..0.671.. |
-| MLP | ..0.730.. | ..0.553.. | ..0.671.. |
+| Algorithm | Accuracy | Macro F1 | Weighted F1 |
+|-----------|----------|----------|-------------|
+| Logistic Regression | 0.746 | 0.642 | 0.702 |
+| Random Forest | 0.746 | 0.564 | 0.707 |
+| Gradient Boosting | 0.762 | 0.534 | 0.730 |
+| SVM | 0.730 | 0.418 | 0.671 |
+| MLP | 0.730 | 0.553 | 0.671 |
 
 ## Limitations & Future Work
 
@@ -353,6 +353,13 @@ def function_name(param1, param2):
 - **`scripts/train_pipeline.py`**: Main orchestration script
 
 ## Contributing & Development
+
+### Authors
+- **Dylan Tan**: Responsible for creating GitHub Repository and the Results in report
+- **Qing Wang**: Responsible for the Methods in report
+- **Pacual Jahuey**: Responsible for writing Discussion and Abstract in report
+- **Jada Brown**: Responsible for writing the Introduction and Literature Review in report
+**All Team Members**: Responsible for idea generation, background research, and contributing to literature review
 
 ### To Add a New Algorithm
 
